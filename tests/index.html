@@ -6,7 +6,7 @@
     grecaptcha.enterprise
       .execute("6LfyKMUcAAAAAHECwzvtW7OmGbw1AyrSdg7cTBLu", { action })
       .then(function (token) {
-        fetch("/", {
+        fetch("/recaptcha", {
           method: "POST",
           headers: {
             Accept: "application/json",

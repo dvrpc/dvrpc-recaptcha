@@ -7,9 +7,12 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/test", express.static(path.join(__dirname, "tests")));
+const router = express.Router();
+app.use("/recaptcha", router);
 
-app.post("/", async (req, res) => {
+router.use("/test", express.static(path.join(__dirname, "tests")));
+
+router.post("/", async (req, res) => {
   try {
     const content = await createAssessment(req.body.token, req.body.action);
     res.status(200).json(content);
