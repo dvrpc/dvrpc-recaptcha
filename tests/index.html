@@ -1,0 +1,28 @@
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6LfyKMUcAAAAAHECwzvtW7OmGbw1AyrSdg7cTBLu"></script>
+<script>
+  const action = "submit";
+  let SCORE = -1;
+  grecaptcha.enterprise.ready(function () {
+    grecaptcha.enterprise
+      .execute("6LfyKMUcAAAAAHECwzvtW7OmGbw1AyrSdg7cTBLu", { action })
+      .then(function (token) {
+        fetch("/", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token, action }),
+        })
+          .then((r) => r.json())
+          .then((r) => {
+            console.log(r);
+            SCORE = r.score;
+            if (SCORE >= 0.5) {
+              //success, submit form
+              alert("Authentic request");
+            }
+          });
+      });
+  });
+</script>
