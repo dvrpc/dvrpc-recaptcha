@@ -15,7 +15,6 @@ app.use(
 app.use(express.json());
 
 const router = express.Router();
-app.use("/recaptcha", router);
 
 router.use("/test", express.static(path.join(__dirname, "tests")));
 
